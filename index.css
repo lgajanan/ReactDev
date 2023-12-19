@@ -1,3 +1,47 @@
-#heading{
-    color: red;
+.header{
+    display: flex;
+    border: 1px solid gray;
+    justify-content: space-between; /*space between logo and nav-items div*/ 
 }
+.logo{
+    width: 120px;
+}
+.nav-items > ul {
+    display: flex;
+    list-style-type: none;
+}
+.nav-items > ul > li {
+    padding:  10px;
+    margin: 10px;
+} 
+
+/*------------------------------ Resturant cards  */
+.restaurant-list {
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .res-card  >img {
+    width: 100%;
+  }
+  .res-card:hover {
+    transform: scale(1.05);
+  }
+  .res-card > span {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .res-card > span > h3 {
+    font-size: medium;
+  }
+  .res-card {
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: -1px 5px 10px 5px rgba(42, 42, 42, 0.2);
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+  }

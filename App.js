@@ -1,15 +1,16 @@
-const heading = React.createElement("div",{ id: "parent" },
+import React from "react";
+import ReactDOM from "react-dom/client";
+import Header  from "./src/component/Header";
+import Body  from "./src/component/Body";
 
-  React.createElement("div", { id: "child" }, [
-    React.createElement("h1", {}, "Tag 1"),
-    React.createElement("h1", {}, "Tag 2"),
-  ]),
-  React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", {}, "Tag 1"),
-    React.createElement("h1", {}, "Tag 2"),
-  ])
-);
-console.log(heading);
+const AppLayout = ()=>{
+  return (
+    <div className="app">
+      <Header />
+      <Body/>
+    </div>
+  )
+}
 const root = ReactDOM.createRoot(document.getElementById("root"));
 //everything placed/show in root
-root.render(heading);
+root.render(<AppLayout />);
