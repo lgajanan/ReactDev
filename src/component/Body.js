@@ -1,19 +1,83 @@
 import ResturantCard from "./ResturantCard";
-import {restaurantList} from "../utils/constant";
+import { SWIGY_API } from "../utils/constant";
+import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
-// Body Component for body section: It contain all restaurant cards
-// We are mapping restaurantList array and passing data to RestaurantCard component as props with unique key as index
+
 const Body = () => {
-  return (
+  // ***Whenever state varibale update react trigger reconcilation cycle(re-render the component).
+  const [listofResturant, setListofResturant] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [filterResturant, setFilterdResturant] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+//Above: dependencyArray [] when you give a value in 
+//dependecnyArray like searchText it will rerender whenever value change of searchText  
+  
+async function fetchData() {
+  // const fetchData = async () => {
+    const data = await fetch(SWIGY_API);
+    const json = await data.json(); //here we converting data into json format.[data.json]
+    try {
+      async function checkResturant(jsonData) {
+        for (let i = 0; i < jsonData?.data?.cards.length; i++) {
+          const isData =
+            json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle
+              ?.restaurants;
+          if (isData !== undefined) {
+            return isData;
+          }
+        }
+      }
+      const resData = await checkResturant(json);
+      setListofResturant(resData);
+      setFilterdResturant(resData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return listofResturant.length == 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
-      <div className="restaurant-list">
-        {  
-          restaurantList.map((resturant)=>{
-            return <ResturantCard key={resturant.data.id} {...resturant.data} />;
-          })
-        }        
+      <div className="filter">
+        <div className="search">
+          <input
+            type="text"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+            placeholder="Search"
+          />
+
+          <button
+            onClick={() => {
+              const filterResturants = listofResturant.filter((res) => {
+                return res.info.name
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase());
+              });
+              setFilterdResturant(filterResturants);
+            }}
+          >
+           Search
+          </button> 
+          <div className="restaurant-list">
+            {filterResturant.map((resturant) => {
+              return (
+              <Link to={"/resturant/"+resturant.info.id}>
+                 <ResturantCard key={resturant.info.id} {...resturant.info} /></Link>
+              );
+            })}
+          </div>
+          <div></div>
+        </div>
       </div>
-      <div></div>
     </div>
   );
 };

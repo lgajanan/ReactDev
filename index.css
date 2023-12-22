@@ -22,21 +22,26 @@
     flex-wrap: wrap;
     justify-content: center;
   }
-  .res-card  >img {
+  
+  .res-card  > img {
     width: 100%;
   }
+  
   .res-card:hover {
     transform: scale(1.05);
   }
+
   .res-card > span {
     display: flex;
     justify-content: space-evenly;
     margin-top: 10px;
     text-align: center;
   }
+  
   .res-card > span > h3 {
     font-size: medium;
   }
+  
   .res-card {
     width: 200px;
     border-radius: 5px;
@@ -44,4 +49,22 @@
     padding: 10px;
     margin: 10px;
     cursor: pointer;
+  }
+  
+  .shimmer-container{
+    display: flex;
+  }
+
+  .shimmer-card{
+    margin: 10px;
+    width: 200px;
+    height: 300px;
+    background-color: gray;
+  }
+  
+  .btn-name{
+    padding: 10px;
+  }
+  .filter{
+    display: flex;
   }
