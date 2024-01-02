@@ -68,3 +68,11 @@
   .filter{
     display: flex;
   }
+  .user-card{
+    border:1px solid gray ;
+    margin: 10px;
+    padding: 10px;
+  }
+  .user-image{
+    width: 100px;;
+  }
