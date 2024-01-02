@@ -3,7 +3,7 @@ import { SWIGY_API } from "../utils/constant";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   // ***Whenever state varibale update react trigger reconcilation cycle(re-render the component).
@@ -39,6 +39,8 @@ async function fetchData() {
       console.log(error);
     }
   };
+  const isOnline = useOnlineStatus();
+  if(isOnline == false) return(<h1>You are Offline !!,Please check Internet Connection</h1>)
 
   return listofResturant.length == 0 ? (
     <Shimmer />
