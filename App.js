@@ -1,4 +1,4 @@
-import React, { lazy,Suspense } from "react";
+import React, { lazy,Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header  from "./src/component/Header";
 import Body  from "./src/component/Body";
@@ -7,15 +7,27 @@ import { createBrowserRouter,Outlet,RouterProvider } from "react-router-dom";
 import ContactUs from "./src/component/Contactus";
 import Error from "./src/component/Error";
 import ResturantMenu from "./src/component/ResturantMenu";
-// import Grocery from "./src/component/Grocery";
 import Shimmer from "./src/component/Shimmer";
+import  UserContext from "./src/component/UserContext";
 
 const AppLayout = ()=>{
+const [userName,setUserName] = useState();
+  useEffect(()=>{
+    //Make API call and send userName * password
+    const data = {
+      name:"Gajanan"
+      }
+      setUserName(data.name);
+  },[]);
+
+
   return (
+   <UserContext.Provider value={{loggedInUser : userName}}>
     <div className="app">
       <Header />
       <Outlet />
     </div>
+    </UserContext.Provider>
   )
 }
 

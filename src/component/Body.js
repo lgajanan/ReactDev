@@ -1,4 +1,4 @@
-import ResturantCard from "./ResturantCard";
+import ResturantCard, { withPromotedLable }from "./ResturantCard";
 import { SWIGY_API } from "../utils/constant";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
@@ -41,15 +41,17 @@ async function fetchData() {
   };
   const isOnline = useOnlineStatus();
   if(isOnline == false) return(<h1>You are Offline !!,Please check Internet Connection</h1>)
+  const  RestaurantsCardPramoted = withPromotedLable(ResturantCard); 
 
   return listofResturant.length == 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="">        
+        <div className="m-4 p-4  items-center  rounded-lg flex  justify-center">
           <input
             type="text"
+            className="border p-2 h-[50px]  rounded-lg w-[600px] shadow-lg border-solid border-black"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
@@ -58,6 +60,7 @@ async function fetchData() {
           />
 
           <button
+          className="p-3 bg-green-300 m-4 shadow-lg w-[100px] rounded-lg"
             onClick={() => {
               const filterResturants = listofResturant.filter((res) => {
                 return res.info.name
@@ -69,18 +72,26 @@ async function fetchData() {
           >
            Search
           </button> 
-          <div className="restaurant-list">
+          </div>
+          
+          <div className="flex flex-wrap justify-center">
+            
             {filterResturant.map((resturant) => {
-              return (
+            // key={resturant.info.id}
+            return (
               <Link to={"/resturant/"+resturant.info.id}>
-                 <ResturantCard key={resturant.info.id} {...resturant.info} /></Link>
+                {resturant.info.avgRating >= 4.5  ? 
+                (<RestaurantsCardPramoted key={resturant.info.id} {...resturant.info}/>) :
+                 (<ResturantCard key={resturant.info.id} {...resturant.info} />)
+                }
+                 </Link>
               );
             })}
           </div>
-          <div></div>
+           
         </div>
       </div>
-    </div>
+    
   );
 };
 
