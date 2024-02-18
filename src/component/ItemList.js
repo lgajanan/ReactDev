@@ -1,8 +1,15 @@
 import { IMG_CDK } from "../utils/constant";
-
+import { addItems } from "../utils/cartSlice";
+import { useDispatch } from "react-redux";
 
 const ItemList = ({ Items }) => {
     // console.log(Items);
+
+  const dispatch = useDispatch();    
+  const handleAddItem = (item) => {
+    dispatch(addItems(item));
+  };
+
     return (
       <div>  
         { Items.map((item) => {
@@ -23,7 +30,7 @@ const ItemList = ({ Items }) => {
 
                 <div className="w-3/12 p-3">
                 <div className="absolute">
-                <button className="p-1 mx-20 my-10 rounded-lg bg-black text-white shadow-lg ">Add+</button>
+                <button onClick={() => handleAddItem(item)} className="p-1 mx-20 my-10 rounded-lg bg-black text-white shadow-lg ">Add+</button>
                 </div>
                     <img src={ IMG_CDK + item?.card?.info?.imageId}  />
                 </div>

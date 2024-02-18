@@ -58,7 +58,6 @@ async function fetchData() {
             }}
             placeholder="Search"
           />
-
           <button
           className="p-3 bg-green-300 m-4 shadow-lg w-[100px] rounded-lg"
             onClick={() => {
@@ -74,25 +73,21 @@ async function fetchData() {
           </button> 
           </div>
           
-          <div className="flex flex-wrap justify-center">
-            
+          <div className="flex flex-wrap justify-center">            
             {filterResturant.map((resturant) => {
             // key={resturant.info.id}
             return (
               <Link to={"/resturant/"+resturant.info.id}>
                 {resturant.info.avgRating >= 4.5  ? 
-                (<RestaurantsCardPramoted key={resturant.info.id} {...resturant.info}/>) :
-                 (<ResturantCard key={resturant.info.id} {...resturant.info} />)
+                (<RestaurantsCardPramoted  {...resturant.info}/>) :
+                (<ResturantCard key={resturant.info.id} {...resturant.info} />)
                 }
-                 </Link>
+                </Link>
               );
             })}
           </div>
-           
         </div>
-      </div>
-    
+      </div>    
   );
 };
-
 export default Body;
