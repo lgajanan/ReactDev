@@ -1,13 +1,17 @@
 import { IMG_CDK } from "../utils/constant";
 
-const ResturantCard = ({
-  cloudinaryImageId,
-  name,
-  cuisines,
-  lastMileTravelString,
-  costForTwo,
-  avgRating,
-}) => {
+const ResturantCard = (props) => {
+  const {resData} = props;
+ 
+  const {
+    cloudinaryImageId,
+    name,
+    cuisines,
+    lastMileTravelString,
+    costForTwo,
+    avgRating,
+  } = resData;
+
   return (
     <div className="m-2 p-4 w-[300px]  rounded-lg  hover:bg-lime-300 bg-yellow-500" >
       <img className="rounded-lg" src={IMG_CDK + cloudinaryImageId} alt="logo" />
@@ -30,7 +34,7 @@ export default ResturantCard;
     return(
       <div>
         <label className="absolute bg-black text-white m-2 p-2 rounded-md">Promoted</label>
-        <ResturantCard {...props} /> 
+        <ResturantCard  resData={props} /> 
       </div>
     )
   }

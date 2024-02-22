@@ -73,7 +73,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path:'resturant/:resId',
-        element:<ResturantMenu />,
+        element:<ResturantMenu  fallback={<Shimmer/>} />,
       }
     ],
     errorElement:<Error />

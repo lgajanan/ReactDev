@@ -12,17 +12,13 @@ const ResturantMenu = () => {
   const [showIndex,setShowIndex] = useState(0);
 
   if (resInfo === null) return <Shimmer />;
-
-  const { itemCards } =
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2].card?.card;
-
-  let name = resInfo?.cards[0]?.card?.card?.info?.name;
-  let imgId = resInfo?.cards[0]?.card?.card?.info?.cloudinaryImageId;
-  
-  const categories  = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+ 
+  let name = resInfo?.cards[0]?.card?.card["text"];
+  // let imgId = resInfo?.cards[0]?.card?.card?.info?.cloudinaryImageId;
+    const categories  = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
     (c)=> c.card?.card?.["@type"] ==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
   )
- 
+  
   return (
     <div className="text-center items-center">
       <h3 className="text-2xl font-bold my-6">Resturant : {name} </h3>

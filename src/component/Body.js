@@ -10,7 +10,7 @@ const Body = () => {
   const [listofResturant, setListofResturant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filterResturant, setFilterdResturant] = useState([]);
-
+// console.log(filterResturant);
   useEffect(() => {
     fetchData();
   }, []);
@@ -32,13 +32,14 @@ async function fetchData() {
           }
         }
       }
-      const resData = await checkResturant(json);
+      const resData = await checkResturant(json);  // console.log(resData);
       setListofResturant(resData);
       setFilterdResturant(resData);
     } catch (error) {
       console.log(error);
     }
   };
+
   const isOnline = useOnlineStatus();
   if(isOnline == false) return(<h1>You are Offline !!,Please check Internet Connection</h1>)
   const  RestaurantsCardPramoted = withPromotedLable(ResturantCard); 
@@ -51,6 +52,7 @@ async function fetchData() {
         <div className="m-4 p-4  items-center  rounded-lg flex  justify-center">
           <input
             type="text"
+            data-testid ="searchInput"
             className="border p-2 h-[50px]  rounded-lg w-[600px] shadow-lg border-solid border-black"
             value={searchText}
             onChange={(e) => {
@@ -58,6 +60,7 @@ async function fetchData() {
             }}
             placeholder="Search"
           />
+
           <button
           className="p-3 bg-green-300 m-4 shadow-lg w-[100px] rounded-lg"
             onClick={() => {
@@ -74,13 +77,12 @@ async function fetchData() {
           </div>
           
           <div className="flex flex-wrap justify-center">            
-            {filterResturant.map((resturant) => {
-            // key={resturant.info.id}
+            {filterResturant.map((resturant,index) => {       
             return (
-              <Link to={"/resturant/"+resturant.info.id}>
+              <Link data-testid="resCardData" to={"/resturant/"+resturant.info.id}  key={resturant.info.id}>
                 {resturant.info.avgRating >= 4.5  ? 
-                (<RestaurantsCardPramoted  {...resturant.info}/>) :
-                (<ResturantCard key={resturant.info.id} {...resturant.info} />)
+                (<RestaurantsCardPramoted key={resturant.info.id}  {...resturant.info}/>) :
+                (<ResturantCard key={resturant.info.id} resData={resturant.info} />)
                 }
                 </Link>
               );

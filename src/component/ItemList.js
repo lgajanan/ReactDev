@@ -11,10 +11,10 @@ const ItemList = ({ Items }) => {
   };
 
     return (
-      <div>  
+      <div >  
         { Items.map((item) => {
           return (
-            <div key={item?.card?.info?.id} className="p-2 m-2 border-gray-400 border-b-2 flex justify-between">
+            <div data-testid="foodItems" key={item?.card?.info?.id} className="p-2 m-2 border-gray-400 border-b-2 flex justify-between">
              
               <div className="w-9/12  text-left">
                 <div className="py-2">
